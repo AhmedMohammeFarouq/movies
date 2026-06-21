@@ -1,0 +1,10 @@
+/* Optional Better Scrollbar */
+::-webkit-scrollbar {
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bdbdbd;
+  border-radius: 999px;
+}
+/*# sourceMappingURL=latest-trailers.component.css.map */

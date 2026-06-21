@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,+BAA+B;AAC/B,AAAA,mBAAmB,CAAC;EAClB,MAAM,EAAE,GAAG;CACZ;;AAED,AAAA,yBAAyB,CAAC;EACxB,UAAU,EAAE,OAAO;EACnB,aAAa,EAAE,KAAK;CACrB",
+    "sources": [
+        "latest-trailers.component.scss"
+    ],
+    "names": [],
+    "file": "latest-trailers.component.css"
+}

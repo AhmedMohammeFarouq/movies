@@ -1,0 +1,151 @@
+@if (loading()) {
+  <section class="fixed inset-0 z-9999 bg-black flex items-center justify-center">
+    <div class="flex flex-col items-center gap-6">
+      <!-- SPINNER -->
+
+      <div
+        class="w-20 h-20 border-4 border-zinc-700 border-t-blue-400 rounded-full animate-spin"
+      ></div>
+
+      <!-- TEXT -->
+
+      <h2 class="text-white text-2xl font-bold tracking-wide">Loading...</h2>
+    </div>
+  </section>
+}
+@if (person()) {
+  <section class="min-h-screen bg-white py-10">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <!-- LEFT SIDE -->
+
+        <div class="lg:col-span-3">
+          <!-- IMAGE -->
+
+          <img
+            class="w-full rounded-2xl shadow-xl object-cover"
+            [src]="
+              person()?.profile_path
+                ? imageBaseUrl + person()?.profile_path
+                : fallbackImage()
+                  ? imageBaseUrl + fallbackImage()
+                  : 'https://placehold.co/500x750?text=No+Image'
+            "
+            [alt]="person()?.name"
+          />
+
+          <!-- PERSONAL INFO -->
+
+          <div class="mt-10">
+            <h2 class="text-3xl font-bold mb-6">Personal Info</h2>
+
+            <!-- KNOWN FOR -->
+
+            <div class="mb-6">
+              <h3 class="font-bold text-xl mb-2">Known For</h3>
+
+              <p class="text-zinc-700">
+                {{ person()?.known_for_department }}
+              </p>
+            </div>
+
+            <!-- GENDER -->
+
+            <div class="mb-6">
+              <h3 class="font-bold text-xl mb-2">Gender</h3>
+
+              <p class="text-zinc-700">
+                {{ person()?.gender === 1 ? 'Female' : 'Male' }}
+              </p>
+            </div>
+
+            <!-- BIRTHDAY -->
+
+            <div class="mb-6">
+              <h3 class="font-bold text-xl mb-2">Birthday</h3>
+
+              <p class="text-zinc-700">
+                {{ person()?.birthday }}
+              </p>
+            </div>
+
+            <!-- PLACE -->
+
+            <div class="mb-6">
+              <h3 class="font-bold text-xl mb-2">Place of Birth</h3>
+
+              <p class="text-zinc-700">
+                {{ person()?.place_of_birth }}
+              </p>
+            </div>
+
+            <!-- POPULARITY -->
+
+            <div class="mb-6">
+              <h3 class="font-bold text-xl mb-2">Popularity</h3>
+
+              <p class="text-zinc-700">
+                {{ person()?.popularity }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT SIDE -->
+
+        <div class="lg:col-span-9">
+          <!-- NAME -->
+
+          <h1 class="text-4xl lg:text-6xl font-bold mb-10">
+            {{ person()?.name }}
+          </h1>
+
+          <!-- BIOGRAPHY -->
+
+          <div class="mb-14">
+            <h2 class="text-3xl font-bold mb-5">{{fallbackName()}}</h2>
+
+            <p class="text-lg leading-10 text-zinc-700 whitespace-pre-line">
+              {{ person()?.biography || 'No biography available.' }}
+            </p>
+          </div>
+
+          <!-- KNOWN FOR -->
+
+          <div class="relative">
+            <h2 class="text-3xl font-bold mb-6">Known For</h2>
+
+            <div class="flex gap-5 overflow-x-auto pb-5">
+              @for (item of credits(); track item.id) {
+                <a [routerLink]="['/movie', item.id]" class="min-w-45 group">
+                  <!-- POSTER -->
+
+                  <div class="overflow-hidden rounded-2xl shadow-lg">
+                    <img
+                      class="w-full h-67.5 object-cover group-hover:scale-105 duration-300"
+                      [src]="
+                        item.poster_path
+                          ? imageBaseUrl + item.poster_path
+                          : 'https://placehold.co/300x450?text=No+Image'
+                      "
+                      [alt]="item.title || item.name"
+                    />
+                  </div>
+
+                  <!-- TITLE -->
+
+                  <h3 class="font-semibold mt-4 text-lg line-clamp-2">
+                    {{ item.title || item.name }}
+                  </h3>
+                </a>
+              }
+            </div>
+                <div
+            class="pointer-events-none absolute top-15 right-0 h-68 w-20 bg-linear-to-l opacity-75 from-[#f5f5f5] via-[#ffffff] to-transparent"
+          ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+}

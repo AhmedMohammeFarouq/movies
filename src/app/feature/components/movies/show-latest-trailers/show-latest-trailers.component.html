@@ -1,0 +1,36 @@
+@if (loading()) {
+  <section class="fixed inset-0 z-9999 bg-black flex items-center justify-center">
+    <div class="flex flex-col items-center gap-6">
+      <!-- SPINNER -->
+
+      <div
+        class="w-20 h-20 border-4 border-zinc-700 border-t-blue-400 rounded-full animate-spin"
+      ></div>
+
+      <!-- TEXT -->
+
+      <h2 class="text-white text-2xl font-bold tracking-wide">Loading...</h2>
+    </div>
+  </section>
+}
+<div class="min-h-screen bg-black flex items-center justify-center">
+
+  @if(trailerUrl()){
+
+    <iframe
+
+      class="w-[90%] h-[80vh] rounded-2xl"
+
+      [src]="trailerUrl()"
+
+      frameborder="0"
+
+      allowfullscreen
+
+      allow="autoplay"
+
+    ></iframe>
+
+  }
+
+</div>

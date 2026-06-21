@@ -1,0 +1,119 @@
+<section class="relative py-10 px-6 md:px-14 bg-white overflow-hidden">
+  <!-- Background -->
+  <div class="bg-line"></div>
+
+  <!-- Content -->
+  <div class="relative z-10">
+    <!-- Header -->
+    <div class="flex items-center gap-6 mb-8">
+      <h2 class="text-2xl font-bold text-black">What's Popular</h2>
+
+      <!-- Tabs -->
+      <div class="flex items-center border-2 border-[#032541] rounded-full overflow-hidden">
+        <button
+          (click)="changeTab('streaming')"
+          class="px-7 py-1 text-lg rounded-full font-semibold transition-all duration-300"
+          [class]="
+            activeTab() === 'streaming' ? 'bg-[#032541] text-green-400' : 'bg-white text-[#032541]'
+          "
+        >
+          Streaming
+        </button>
+
+        <button
+          (click)="changeTab('tv')"
+          class="px-7 py-1 text-lg rounded-full font-semibold transition-all duration-300"
+          [class]="activeTab() === 'tv' ? 'bg-[#032541] text-green-400' : 'bg-white text-[#032541]'"
+        >
+          On TV
+        </button>
+
+        <button
+          (click)="changeTab('rent')"
+          class="px-7 py-1 text-lg rounded-full font-semibold transition-all duration-300"
+          [class]="
+            activeTab() === 'rent' ? 'bg-[#032541] text-green-400' : 'bg-white text-[#032541]'
+          "
+        >
+          For Rent
+        </button>
+
+        <button
+          (click)="changeTab('theaters')"
+          class="px-7 py-1 text-lg rounded-full font-semibold transition-all duration-300"
+          [class]="
+            activeTab() === 'theaters' ? 'bg-[#032541] text-green-400' : 'bg-white text-[#032541]'
+          "
+        >
+          In Theaters
+        </button>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="flex gap-6 overflow-x-scroll overflow-y-hidden pb-6">
+      @for (movie of movies(); track $index) {
+        <div class="max-w-40 shrink-0 group cursor-pointer" [routerLink]="['/movie', movie.id]">
+          <!-- Image -->
+          <div class="relative overflow-hidden rounded-2xl">
+            <img
+              [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+              [alt]="movie.title"
+              class="w-full h-72 object-cover rounded-2xl transition-transform duration-500 group-hover:scale-110"
+            />
+
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 duration-300"></div>
+
+            <!-- Menu -->
+            <button
+              (click)="toggleMenu(movie.id); $event.stopPropagation()"
+              class="absolute top-3 right-3 bg-white/90 w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold hover:bg-white"
+            >
+              •••
+            </button>
+
+            <!-- Dropdown -->
+            @if (openMenu === movie.id) {
+              <div
+                class="absolute w-35 top-14 right-3 bg-white rounded-xl shadow-2xl overflow-hidden z-50"
+              >
+                <button class="w-full text-left px-3 py-2 hover:bg-gray-100 text-sm">
+                  <i class="fa-solid fa-list"></i> Add to list
+                </button>
+
+                <button class="w-full text-left px-3 py-2 hover:bg-gray-100 text-sm">
+                  <i class="fa-solid fa-heart"></i> Favorite
+                </button>
+
+                <button class="w-full text-left px-3 py-2 hover:bg-gray-100 text-sm">
+                  <i class="fa-solid fa-bookmark"></i> Watchlist
+                </button>
+
+                <button class="w-full text-left px-3 py-2 hover:bg-gray-100 text-sm">
+                  <i class="fa-solid fa-star"></i> Your rating
+                </button>
+              </div>
+            }
+          </div>
+
+          <!-- Info -->
+          <div class="mt-4">
+            <h3
+              class="text-lg font-bold text-black leading-tight hover:text-[#01B4E4] duration-300"
+            >
+              {{ movie.title || movie.name }}
+            </h3>
+
+            <p class="text-gray-500 text-sm mt-1">
+              {{ movie.release_date || movie.first_air_date }}
+            </p>
+          </div>
+        </div>
+      }
+      <div
+        class="pointer-events-none absolute top-[-5] right-0 h-72 w-30 bg-linear-to-l opacity-75 from-[#f5f5f5] via-[#ffffff] to-transparent"
+      ></div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,52 @@
+<!-- home-slider.component.html -->
+
+<section class="relative w-full h-105 overflow-hidden">
+
+  <!-- Background Image -->
+  <div
+    class="absolute inset-0 bg-cover bg-center transition-all duration-1000"
+    [style.backgroundImage]="'url(' + images[currentIndex] + ')'"
+  ></div>
+
+  <!-- Dark Blue Overlay -->
+  <div class="absolute inset-0 bg-[#032541]/50"></div>
+
+  <!-- Content -->
+  <div
+    class=" max-w-8xl mx-auto relative z-20 h-full flex flex-col justify-center px-3 md:px-6 lg:px-12"
+  >
+
+    <!-- Title -->
+    <h1
+      class="text-white text-5xl md:text-7xl font-extrabold mb-2"
+    >
+      Welcome.
+    </h1>
+
+    <!-- Subtitle -->
+    <h3
+      class="text-white text-2xl md:text-5xl font-bold mb-12"
+    >
+      Millions of movies, TV shows and people to discover. Explore now.
+    </h3>
+
+    <!-- Search -->
+    <div class="relative w-full">
+
+      <input
+        type="text"
+        placeholder="Search for a movie, tv show, person......"
+        class="w-full py-2 px-4 rounded-full outline-none text-gray-700"
+      />
+
+      <button
+        class="absolute top-0 right-0 cursor-pointer  h-full px-10 md:px-14 rounded-full text-white text-xl md:text-2xl font-semibold bg-gradient-to-r from-green-400 to-cyan-400 hover:opacity-90 duration-300"
+      >
+        Search
+      </button>
+
+    </div>
+
+  </div>
+
+</section>

@@ -1,0 +1,20 @@
+<div class="grid grid-cols-5 gap-5 p-10">
+
+  @for(movie of favorites(); track movie.id){
+
+    <div>
+
+      <img
+        class="rounded-xl"
+        [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+      >
+
+      <h2 class="mt-3 font-bold">
+        {{movie.title}}
+      </h2>
+
+    </div>
+
+  }
+
+</div>

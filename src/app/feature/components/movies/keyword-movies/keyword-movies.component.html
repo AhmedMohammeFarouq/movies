@@ -1,0 +1,113 @@
+
+@if (loading()) {
+  <section class="fixed inset-0 z-[9999] bg-black flex items-center justify-center">
+    <div class="flex flex-col items-center gap-6">
+      <!-- SPINNER -->
+
+      <div
+        class="w-20 h-20 border-4 border-zinc-700 border-t-blue-400 rounded-full animate-spin"
+      ></div>
+
+      <!-- TEXT -->
+
+      <h2 class="text-white text-2xl font-bold tracking-wide">Loading...</h2>
+    </div>
+  </section>
+}
+<section class="min-h-screen bg-zinc-100">
+  <!-- HEADER -->
+
+  <div class="bg-[#032541] py-8 px-6 relative overflow-hidden">
+    <div class="container mx-auto flex items-center justify-between">
+
+        <h1 class="text-4xl font-bold text-white capitalize">
+          {{ keywordName() }}
+        </h1>
+
+        <p class="text-zinc-300 mt-3 text-2xl ">
+          {{ movies().length }}
+          shows
+        </p>
+
+    </div>
+
+    <!-- TMDB STYLE LINES -->
+
+    <div class="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
+      <div class="absolute w-40 h-4 bg-cyan-400 rotate-45 top-10 left-20 rounded-full"></div>
+
+      <div class="absolute w-60 h-4 bg-cyan-400 rotate-45 top-0 right-20 rounded-full"></div>
+
+      <div class="absolute w-32 h-4 bg-cyan-400 rotate-45 bottom-5 right-60 rounded-full"></div>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+
+  <div class="bg-white border-b">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-center gap-10">
+      <button class="font-medium hover:text-sky-600 duration-300">Overview</button>
+
+      <button class="font-medium hover:text-sky-600 duration-300">TV Shows</button>
+
+      <button class="font-medium hover:text-sky-600 duration-300">Sort</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+
+  <div class="container mx-auto px-4 py-8">
+    <div class="space-y-6">
+      @for (movie of movies(); track movie.id) {
+        <a
+          [routerLink]="['/movie', movie.id]"
+          class="bg-white rounded-2xl shadow-md hover:shadow-xl duration-300 overflow-hidden flex flex-col sm:flex-row"
+        >
+          <!-- POSTER -->
+
+          <div class="sm:w-[160px] flex-shrink-0">
+            <img
+              class="w-full h-[240px] sm:h-full object-cover"
+              [src]="imageBaseUrl + movie.poster_path"
+              [alt]="movie.title"
+            />
+          </div>
+
+          <!-- DETAILS -->
+
+          <div class="p-5 flex flex-col justify-center">
+            <!-- TITLE -->
+
+            <h2 class="text-2xl font-bold text-zinc-900">
+              {{ movie.title }}
+            </h2>
+
+            <!-- DATE -->
+
+            <p class="text-zinc-500 mt-1">
+              {{ movie.release_date | date: 'MMMM d, yyyy' }}
+            </p>
+
+            <!-- OVERVIEW -->
+
+            <p class="mt-5 text-zinc-700 leading-7 line-clamp-3">
+              {{ movie.overview }}
+            </p>
+
+            <!-- RATE -->
+
+            <div class="flex items-center gap-2 mt-5">
+              <div
+                class="w-10 h-10 rounded-full bg-[#032541] text-white flex items-center justify-center text-sm font-bold"
+              >
+                {{ movie.vote_average | number: '1.0-1' }}
+              </div>
+
+              <span class="text-zinc-500"> User Score </span>
+            </div>
+          </div>
+        </a>
+      }
+    </div>
+  </div>
+</section>
