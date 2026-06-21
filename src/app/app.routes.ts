@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth/auth.guard';
+import { ShowLatestTrailersComponent } from './feature/components/movies/show-latest-trailers/show-latest-trailers.component';
+import { KeywordMoviesComponent } from './feature/components/movies/keyword-movies/keyword-movies.component';
 
 export const routes: Routes = [
-  {path:'',redirectTo:'login',pathMatch:'full'},
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'home',
     loadComponent: () =>
@@ -17,35 +19,33 @@ export const routes: Routes = [
     path: 'movie/:id',
     loadComponent: () =>
       import('./feature/components/movies/movie-details/movie-details.component').then(
-        (m) => m.MovieDetailsComponent
+        (m) => m.MovieDetailsComponent,
       ),
   },
   {
     path: 'movie-keywords/:id/:name',
-    loadComponent: () =>
-      import('./feature/components/movies/keyword-movies/keyword-movies.component').then(
-        (m) => m.KeywordMoviesComponent
-      ),
+    component: KeywordMoviesComponent,
+    title: 'Keyword Movies',
   },
   {
     path: 'person_id/:id',
     loadComponent: () =>
       import('./feature/components/movies/person-details/person-details.component').then(
-        (m) => m.PersonDetailsComponent
+        (m) => m.PersonDetailsComponent,
       ),
   },
   {
     path: 'show-latest-trailers/:id',
-    loadComponent: () =>
-      import('./feature/components/movies/show-latest-trailers/show-latest-trailers.component').then(
-        (m) => m.ShowLatestTrailersComponent
-      ),
+    component: ShowLatestTrailersComponent,
+    title: 'Show Latest Trailers',
   },
 
   {
     path: 'pupularPeople',
     loadComponent: () =>
-      import('./feature/components/movies/popularpeople/popularpeople.component').then((m) => m.PopularpeopleComponent),
+      import('./feature/components/movies/popularpeople/popularpeople.component').then(
+        (m) => m.PopularpeopleComponent,
+      ),
   },
   {
     path: 'profile',
@@ -68,19 +68,20 @@ export const routes: Routes = [
       import('./shared/components/watchlist/watchlist.component').then((c) => c.WatchlistComponent),
   },
   {
-  path: 'movie/:id',
-  loadComponent: () =>
-    import('./feature/components/movies/movie-details/movie-details.component')
-      .then((c) => c.MovieDetailsComponent),
-},
-// {
-//   path: 'movie-keywords/:id',
-//   loadComponent: () =>
-//     import('./feature/components/movies/keyword-movies/keyword-movies.component')
-//       .then((c) => c.KeywordMoviesComponent),
-// },
-{
-  path: '**',
-  redirectTo: 'home'
-},
+    path: 'movie/:id',
+    loadComponent: () =>
+      import('./feature/components/movies/movie-details/movie-details.component').then(
+        (c) => c.MovieDetailsComponent,
+      ),
+  },
+  // {
+  //   path: 'movie-keywords/:id',
+  //   loadComponent: () =>
+  //     import('./feature/components/movies/keyword-movies/keyword-movies.component')
+  //       .then((c) => c.KeywordMoviesComponent),
+  // },
+  {
+    path: '**',
+    redirectTo: 'home',
+  },
 ];
