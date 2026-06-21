@@ -74,12 +74,6 @@ export const routes: Routes = [
         (c) => c.MovieDetailsComponent,
       ),
   },
-  // {
-  //   path: 'movie-keywords/:id',
-  //   loadComponent: () =>
-  //     import('./feature/components/movies/keyword-movies/keyword-movies.component')
-  //       .then((c) => c.KeywordMoviesComponent),
-  // },
   {
     path: '**',
     redirectTo: 'home',
